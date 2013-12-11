@@ -58,7 +58,7 @@ class Reknar:
         with open(self.pickle, 'wb') as pickle:
             cPickle.dump(self, pickle)
         
-    def refresh(self, graph):
+    def update_graph(self, graph):
         """
         Redips.graph -> None
         Update Reknar's graph by changing it to the input graph

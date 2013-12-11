@@ -57,8 +57,13 @@ class Craes:
         """
         
         pages = self.lookup(keyword)
+        if not pages:
+            print "Sorry,", keyword, " is not in our index yet!"
+            return
+
         self.quick_sort(pages, 0, len(pages))
-        return pages
+        for page in pages:
+            return page
 
     def quick_sort(self, pages, start_pt, end_pt):
         if start_pt < end_pt - 1:
