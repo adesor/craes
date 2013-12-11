@@ -12,18 +12,7 @@ To use:
 >>> craes = Craes()
 ```
 
-To do a lucky search:
-```Python
->>> craes.lucky_search('foo')
-```
-
-To do an ordered search:
-```Python
->>> craes.search('bar')
-```
-
 To use index or ranks other than the default,
-
 ```Python
 >>> from craes import Craes
 >>> import redips
@@ -32,3 +21,30 @@ To use index or ranks other than the default,
 >>> rek = reknar.load('reknar-pickle-file-of-your-choice')
 >>> craes = Craes(red.get_index(), rek.get_ranks())
 ```
+
+To do a lucky search:
+```Python
+>>> craes.lucky_search('foo')
+http://abc.xyz
+```
+
+To do an ordered search:
+```Python
+>>> craes.search('bar')
+http://foo.bar
+http://blah.bleh
+```
+
+To fetch the best result:
+```Python
+>>> craes.get_best('foo')
+'http://abc.xyz'
+```
+
+To fetch an ordered list of all the search results:
+```Python
+>>> craes.get_results('bar')
+['http://foo.bar', 'http://abc.xyz']
+```
+
+
