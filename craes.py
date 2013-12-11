@@ -62,8 +62,7 @@ class Craes:
             return
 
         self.quick_sort(pages, 0, len(pages))
-        for page in pages:
-            return page
+        return pages
 
     def quick_sort(self, pages, start_pt, end_pt):
         if start_pt < end_pt - 1:
