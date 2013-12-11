@@ -32,7 +32,7 @@ class Craes:
             return list(self.index[keyword])
         return None
 
-    def lucky_search(self, keyword):
+    def get_best(self, keyword):
         """
         string(keyword) -> string(URL)
         Return the URL best suited for the input keyword
@@ -49,7 +49,14 @@ class Craes:
                 best_page = page
         return best_page
 
-    def search(self, keyword):
+    def lucky_search(self, keyword):
+        """
+        string(keyword) -> None
+        Print the best search result
+        """
+        print self.get_best(keyword)
+
+    def get_results(self, keyword):
         """
         string(keyword) -> list(string(URL))
         Return a list of URLs corresponding to the given keyword
@@ -63,6 +70,16 @@ class Craes:
 
         self.quick_sort(pages, 0, len(pages))
         return pages
+
+    def search(self, keyword):
+        """
+        string(keyword) -> None
+        Print a list of URLs corresponding to the given keyword
+        ordered by their ranks
+        """
+        pages = self.get_results(keyword)
+        for page in pages:
+            print page
 
     def quick_sort(self, pages, start_pt, end_pt):
         if start_pt < end_pt - 1:
