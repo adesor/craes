@@ -190,3 +190,35 @@ class Redips:
         Clear the fetched links list of the crawler
         """
         self.to_crawl = []
+
+    def merge_index(self, index):
+        """
+        dict(index) -> None
+        Merge index with Redips' index
+        """
+        for word in list(index):
+            if word not in self.index:
+                self.index[word] = index[word]
+            else:
+                self.index[word].union(index[word])
+
+    def merge_graph(self, graph):
+        """
+        dict(graph) -> None
+        Merge the graph with Redips' graph
+        """
+        for page in graph:
+            if page not in self.graph:
+                self.graph[page] = graph[page]
+            else:
+                self.graph[page].extend(graph[page])
+
+    def merge(self, redips):
+        """
+        Redips -> None
+        Merge the input Redips' index and graph with
+        the current Redips' index and graph
+        """
+        self.merge_index(redips.get_index())
+        self.merge_graph(redips.get_graph())
+

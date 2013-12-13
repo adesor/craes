@@ -58,14 +58,21 @@ class Reknar:
         with open(self.pickle, 'wb') as pickle:
             cPickle.dump(self, pickle)
         
-    def update_graph(self, graph):
+    def merge_graph(self, graph):
         """
         Redips.graph -> None
-        Update Reknar's graph by changing it to the input graph
+        Merge Reknar's graph with the input graph
         """
-        self.graph = graph
-        self.npages = len(graph)
-        for page in self.graph:
+        for page in graph:
+            if page not in self.graph:
+                self.graph[page] = graph[page]
+            else:
+                self.graph[page].extend(graph[page])
+
+        self.npages = len(self.graph)
+
+        # Update ranks
+        for page in graph:
             if page not in self.ranks:
                 self.ranks[page] = 1.0 / self.npages
 
