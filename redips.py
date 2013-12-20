@@ -7,7 +7,7 @@ import re
 import cPickle
 from bs4 import BeautifulSoup
 from urllib2 import urlopen
-from urlparse import *
+from urlparse import urlparse, urljoin
 
 def load(pickle):
     """
@@ -27,7 +27,7 @@ class Redips:
         self.index = {}
         self.graph = {}
         if seed_url:
-            self.to_crawl = [seed_url]
+            self.to_crawl = [urlopen(seed_url).geturl()]
         else:
             self.to_crawl = []
         self.crawled_links = []
@@ -38,7 +38,8 @@ class Redips:
         string(url) -> None
         Add the url to the list of links to crawl
         """
-        self.to_crawl.append(url)
+        url_obj = urlopen(url)
+        self.to_crawl.append(url_obj.geturl())
     
     def save(self):
         """
@@ -100,7 +101,7 @@ class Redips:
 
     def crawl_page(self, seed_url):
         """
-        string -> index, graph
+        string -> None
         Crawl the page by:
         - Adding the seed_url's entry into the graph
         - Adding the contents of the seed_url page to the index
@@ -165,6 +166,7 @@ class Redips:
         string(seed_url), string(word) -> None
         Add the input word to the index
         """
+        word = word.lower()
         if word in self.index:
             self.index[word].add(seed_url)
         else:

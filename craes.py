@@ -28,7 +28,7 @@ class Craes:
         Return the list of URLs corresponding to the input keyword
         in the index
         """
-        if keyword in self.index:
+        if keyword.lower() in self.index:
             return list(self.index[keyword])
         return None
 
